@@ -11,4 +11,17 @@ router.get('/ads', (request, response, next) =>
     .catch(error => next(error))
 );
 
+//Post an ad
+router.post('/postad', (req, res, next) => {
+  let { title, description, picture, price, email, phone } = req.body;
+  Ads.create(req.body)
+    .then(ad => {
+      res.status(201).json({
+        message: 'A New Ad Was Added',
+        'new Ads': ad
+      });
+    })
+    .catch(error => next(error));
+});
+
 module.exports = router;
